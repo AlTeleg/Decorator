@@ -17,18 +17,31 @@ def logger(log_path):
                         f'function_args = "{args}" and "{kwargs}"\n'
                         f'function_start_date = "{datetime.date.today()}"\n'
                         f'function_start_time = "{datetime.datetime.now().time()}"\n')
-                result = func(*args, **kwargs)
-                l.write(f'function_result = "{result}"')
-
+                res = func(*args, **kwargs)
+                l.write(f'function_result = "{res}"')
+            return res
         return wrapper
 
     return logger_decorator
 
 
+# @logger(log_path=input("Input log saving path :"))
+# def test_func(a, b, c):
+#     return a * b + c
+
 @logger(log_path=input("Input log saving path :"))
-def test_func(a, b, c):
-    return a * b + c
+def summator(x, y):
+   return x + y
+
+
 
 
 if __name__ == '__main__':
-    test_func(1, 2, 3)
+    three = summator(1, 2)
+    five = summator(2, 3)
+
+    result = summator(three, five)
+
+    print('result: ', result)
+    print('result type: ', type(result))
+    # test_func(1, 2, 3)
